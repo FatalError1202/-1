@@ -13,6 +13,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            transition: background 0.3s ease-in-out;
         }
         .container {
             background: white;
@@ -22,6 +23,7 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease-in-out;
         }
         h2 {
             font-size: 24px;
@@ -64,13 +66,37 @@
 <body>
     <div class="container">
         <h2>Выберите дату</h2>
-        <input type="date" id="datePicker">
+        <input type="date" id="datePicker" onchange="updateBackground()">
         <br>
         <button onclick="sendDate()">Отправить</button>
         <p id="alertMessage" class="alert" style="display: none;">Выберите дату!</p>
     </div>
 
     <script>
+        function updateBackground() {
+            let month = new Date(document.getElementById('datePicker').value).getMonth(); // Получаем месяц (0 - Январь, 11 - Декабрь)
+            let body = document.body;
+            
+            // Фон для разных времен года
+            if (month >= 2 && month <= 4) {
+                // Весна (Март, Апрель, Май)
+                body.style.background = 'url("https://example.com/spring.jpg") no-repeat center center fixed';
+                body.style.backgroundSize = 'cover';
+            } else if (month >= 5 && month <= 7) {
+                // Лето (Июнь, Июль, Август)
+                body.style.background = 'url("https://example.com/summer.jpg") no-repeat center center fixed';
+                body.style.backgroundSize = 'cover';
+            } else if (month >= 8 && month <= 10) {
+                // Осень (Сентябрь, Октябрь, Ноябрь)
+                body.style.background = 'url("https://example.com/autumn.jpg") no-repeat center center fixed';
+                body.style.backgroundSize = 'cover';
+            } else {
+                // Зима (Декабрь, Январь, Февраль)
+                body.style.background = 'url("https://example.com/winter.jpg") no-repeat center center fixed';
+                body.style.backgroundSize = 'cover';
+            }
+        }
+
         function sendDate() {
             let date = document.getElementById('datePicker').value;
             let alertMessage = document.getElementById('alertMessage');
