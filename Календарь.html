@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор даты</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Выберите дату</h2>
+    <input type="date" id="datePicker">
+    <br>
+    <button onclick="sendDate()">Отправить</button>
+
+    <script>
+        function sendDate() {
+            let date = document.getElementById('datePicker').value;
+            if (date) {
+                Telegram.WebApp.sendData(date); // Отправка даты боту
+                Telegram.WebApp.close(); // Закрытие Web App
+            } else {
+                alert("Выберите дату!");
+            }
+        }
+    </script>
+</body>
+</html>
