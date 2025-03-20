@@ -7,39 +7,79 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
             text-align: center;
-            margin: 50px;
+            margin: 0;
+            padding: 0;
         }
-        input {
-            padding: 10px;
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 24px;
+            color: #0088cc;
+            margin-bottom: 20px;
+        }
+        input[type="date"] {
+            padding: 12px;
             font-size: 18px;
-            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 250px;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        input[type="date"]:focus {
+            border-color: #0088cc;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 30px;
             font-size: 18px;
             background-color: #0088cc;
             color: white;
             border: none;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #005f8c;
+        }
+        .alert {
+            color: red;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h2>Выберите дату</h2>
-    <input type="date" id="datePicker">
-    <br>
-    <button onclick="sendDate()">Отправить</button>
+    <div class="container">
+        <h2>Выберите дату</h2>
+        <input type="date" id="datePicker">
+        <br>
+        <button onclick="sendDate()">Отправить</button>
+        <p id="alertMessage" class="alert" style="display: none;">Выберите дату!</p>
+    </div>
 
     <script>
         function sendDate() {
             let date = document.getElementById('datePicker').value;
+            let alertMessage = document.getElementById('alertMessage');
+
             if (date) {
                 Telegram.WebApp.sendData(date); // Отправка даты боту
                 Telegram.WebApp.close(); // Закрытие Web App
             } else {
-                alert("Выберите дату!");
+                alertMessage.style.display = 'block'; // Показать сообщение об ошибке
             }
         }
     </script>
