@@ -76,8 +76,14 @@
             let alertMessage = document.getElementById('alertMessage');
 
             if (date) {
-                Telegram.WebApp.sendData(date); // Отправка даты боту
-                Telegram.WebApp.close(); // Закрытие Web App
+                // Отправляем дату в WatBot через WebApp API
+                Telegram.WebApp.sendData(date);  // отправка данных в бот
+
+                // Закрываем WebApp после отправки данных
+                Telegram.WebApp.close();
+
+                // Если необходимо, можем выводить сообщение об успешной отправке
+                alert("Дата успешно отправлена: " + date);
             } else {
                 alertMessage.style.display = 'block'; // Показать сообщение об ошибке
             }
